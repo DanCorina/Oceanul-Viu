@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oceanul Viu — Viața Marină în Splendoarea Sa</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,600;1,300;1,600&family=DM+Sans:wght@300;400;500&display=swap');
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --deep:#020d1a;--mid:#053a5f;--light:#0a7abf;
+  --foam:#5bc8ea;--glow:#a8f0ff;--gold:#f5d060;
+  --green:#1aaa6a;--text:#e8f5ff;--muted:#6a9aaa;
+}
+
+body{
+  background:var(--deep);
+  font-family:'DM Sans',sans-serif;
+  color:var(--text);
+  overflow-x:hidden;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:100vh;
+  min-height:560px;
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+.hero-bg{
+  position:absolute;inset:0;
+  background:radial-gradient(ellipse at 50% 110%, #0a5fa0 0%, #042855 45%, #010d1a 100%);
+}
+
+/* Animated light rays */
+.ray{
+  position:absolute;
+  top:0;
+  width:2px;
+  height:65%;
+  transform-origin:top center;
+  animation:sway ease-in-out infinite;
+  border-radius:0 0 50% 50%;
+}
+@keyframes sway{
+  0%,100%{transform:skewX(-8deg);opacity:0.3;}
+  50%{transform:skewX(8deg);opacity:0.7;}
+}
+
+/* Bioluminescent particles */
+.dot{
+  position:absolute;
+  border-radius:50%;
+  background:#00fff7;
+  animation:glow-pulse ease-in-out infinite;
+}
+@keyframes glow-pulse{
+  0%,100%{opacity:0.1;transform:scale(1);}
+  50%{opacity:0.9;transform:scale(1.4);}
+}
+
+/* Bubbles */
+.bbl{
+  position:absolute;
+  border-radius:50%;
+  border:1px solid rgba(100,220,255,0.3);
+  animation:rise-up linear infinite;
+}
+@keyframes rise-up{
+  0%{opacity:0;transform:translateY(0);}
+  10%{opacity:0.6;}
+  90%{opacity:0.3;}
+  100%{opacity:0;transform:translateY(-100vh);}
+}
+
+.hero-content{
+  position:relative;z-index:10;
+  text-align:center;
+  padding:0 24px;
+  max-width:700px;
+}
+
+.hero-eyebrow{
+  font-size:11px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  color:var(--foam);
+  opacity:0.8;
+  margin-bottom:20px;
+}
+
+h1{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(56px,12vw,110px);
+  line-height:0.9;
+  letter-spacing:-2px;
+  font-weight:300;
+  color:white;
+  margin-bottom:8px;
+}
+
+h1 em{
+  font-style:italic;
+  color:var(--glow);
+}
+
+.hero-tagline{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(18px,3vw,26px);
+  color:rgba(168,240,255,0.8);
+  font-style:italic;
+  font-weight:300;
+  margin-bottom:24px;
+}
+
+.hero-p{
+  font-size:clamp(13px,1.8vw,16px);
+  color:rgba(232,245,255,0.65);
+  font-weight:300;
+  line-height:1.7;
+  max-width:460px;
+  margin:0 auto 36px;
+}
+
+.scroll-hint{
+  font-size:10px;letter-spacing:4px;color:var(--muted);
+  text-transform:uppercase;
+  animation:fade-pulse 2.5s ease-in-out infinite;
+}
+@keyframes fade-pulse{0%,100%{opacity:0.3;}50%{opacity:0.9;}}
+
+/* WAVE DIVIDER */
+.wave-div{
+  height:80px;overflow:hidden;
+  background:var(--deep);
+}
+.wave-div svg{display:block;width:100%;height:100%;}
+
+/* ZONES */
+.zones{
+  padding:60px 20px 40px;
+  max-width:960px;
+  margin:0 auto;
+}
+
+.zones-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,5vw,48px);
+  font-weight:300;
+  color:white;
+  text-align:center;
+  margin-bottom:8px;
+}
+.zones-sub{
+  text-align:center;
+  font-size:14px;
+  color:var(--muted);
+  margin-bottom:48px;
+  font-weight:300;
+}
+
+.zone-row{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:2px;
+  margin-bottom:2px;
+}
+@media(max-width:600px){.zone-row{grid-template-columns:1fr;}}
+
+.zone-card{
+  position:relative;
+  overflow:hidden;
+  padding:32px 28px;
+  min-height:200px;
+  display:flex;flex-direction:column;justify-content:flex-end;
+}
+
+.zone-bg{position:absolute;inset:0;z-index:0;}
+
+.zone-card-content{position:relative;z-index:1;}
+
+.zone-depth{
+  font-size:10px;letter-spacing:3px;text-transform:uppercase;
+  color:rgba(255,255,255,0.5);
+  margin-bottom:8px;
+}
+
+.zone-card h3{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(22px,3.5vw,30px);
+  font-weight:300;
+  color:white;
+  margin-bottom:8px;
+  font-style:italic;
+}
+
+.zone-card p{
+  font-size:13px;
+  color:rgba(255,255,255,0.7);
+  font-weight:300;
+  line-height:1.6;
+}
+
+.zone-creatures{
+  display:flex;gap:8px;flex-wrap:wrap;
+  margin-top:12px;
+}
+
+.creature-pill{
+  font-size:11px;
+  padding:3px 10px;
+  border-radius:20px;
+  background:rgba(255,255,255,0.1);
+  border:1px solid rgba(255,255,255,0.15);
+  color:rgba(255,255,255,0.8);
+}
+
+/* FACTS STRIP */
+.facts-strip{
+  padding:64px 20px;
+  max-width:960px;
+  margin:0 auto;
+}
+
+.facts-strip-title{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,4vw,42px);
+  font-weight:300;
+  text-align:center;
+  color:white;
+  margin-bottom:40px;
+  font-style:italic;
+}
+
+.facts-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:16px;
+}
+
+.fact-card{
+  background:rgba(10,122,191,0.08);
+  border:1px solid rgba(91,200,234,0.12);
+  padding:28px 24px;
+  position:relative;
+  overflow:hidden;
+}
+
+.fact-card::before{
+  content:'';
+  position:absolute;
+  top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg, var(--foam), transparent);
+}
+
+.fact-icon{
+  font-size:28px;
+  margin-bottom:14px;
+  display:block;
+}
+
+.fact-card h4{
+  font-family:'Cormorant Garamond',serif;
+  font-size:18px;
+  font-weight:600;
+  color:white;
+  margin-bottom:8px;
+}
+
+.fact-card p{
+  font-size:13px;
+  color:rgba(232,245,255,0.6);
+  font-weight:300;
+  line-height:1.65;
+}
+
+.fact-highlight{
+  font-family:'Cormorant Garamond',serif;
+  font-size:32px;
+  font-style:italic;
+  color:var(--foam);
+  margin-top:12px;
+  display:block;
+}
+
+/* SPECIES SHOWCASE */
+.species-showcase{
+  padding:64px 20px;
+  max-width:960px;
+  margin:0 auto;
+}
+
+.species-showcase h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(28px,5vw,48px);
+  font-weight:300;
+  color:white;
+  margin-bottom:32px;
+  font-style:italic;
+}
+
+.species-list{
+  display:flex;flex-direction:column;gap:1px;
+}
+
+.species-row{
+  display:grid;
+  grid-template-columns:80px 1fr auto;
+  gap:20px;
+  align-items:center;
+  padding:20px 24px;
+  background:rgba(255,255,255,0.02);
+  border-left:2px solid transparent;
+  transition:all 0.3s;
+}
+.species-row:hover{
+  background:rgba(91,200,234,0.06);
+  border-left-color:var(--foam);
+}
+
+.species-emoji{font-size:36px;text-align:center;}
+
+.species-info h4{font-size:16px;font-weight:500;color:white;margin-bottom:4px;}
+.species-info p{font-size:13px;color:var(--muted);font-weight:300;line-height:1.5;}
+
+.species-depth{
+  font-family:'Cormorant Garamond',serif;
+  font-size:20px;
+  font-style:italic;
+  color:var(--foam);
+  opacity:0.7;
+  text-align:right;
+  white-space:nowrap;
+}
+
+/* OCEAN HEALTH BANNER */
+.health-banner{
+  margin:0 20px 64px;
+  max-width:920px;
+  margin-left:auto;
+  margin-right:auto;
+  background:linear-gradient(135deg, rgba(10,122,191,0.15), rgba(26,170,106,0.1));
+  border:1px solid rgba(91,200,234,0.2);
+  border-top:2px solid var(--foam);
+  padding:48px 40px;
+  text-align:center;
+}
+
+.health-banner h2{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(26px,4vw,44px);
+  font-weight:300;
+  color:white;
+  margin-bottom:16px;
+  font-style:italic;
+}
+
+.health-banner p{
+  font-size:clamp(13px,1.8vw,16px);
+  color:rgba(232,245,255,0.7);
+  max-width:560px;
+  margin:0 auto 24px;
+  font-weight:300;
+  line-height:1.7;
+}
+
+.health-stats{
+  display:flex;justify-content:center;gap:40px;flex-wrap:wrap;
+  margin-top:32px;
+  padding-top:28px;
+  border-top:1px solid rgba(91,200,234,0.1);
+}
+
+.hs-item{text-align:center;}
+.hs-num{
+  font-family:'Cormorant Garamond',serif;
+  font-size:clamp(36px,6vw,56px);
+  font-style:italic;
+  color:var(--glow);
+  display:block;line-height:1;
+}
+.hs-label{font-size:12px;color:var(--muted);margin-top:6px;font-weight:300;}
+
+/* FOOTER */
+.footer{
+  text-align:center;
+  padding:40px 20px;
+  border-top:1px solid rgba(91,200,234,0.08);
+  font-size:11px;
+  letter-spacing:3px;
+  color:var(--muted);
+  text-transform:uppercase;
+}
+</style>
+</head>
+<body>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+
+  <!-- Light rays -->
+  <div class="ray" style="left:10%;background:linear-gradient(180deg,rgba(91,200,234,0.2),transparent);height:60%;animation-duration:7s;animation-delay:0s;"></div>
+  <div class="ray" style="left:25%;background:linear-gradient(180deg,rgba(168,240,255,0.15),transparent);height:70%;animation-duration:9s;animation-delay:2s;width:4px;"></div>
+  <div class="ray" style="left:45%;background:linear-gradient(180deg,rgba(91,200,234,0.18),transparent);height:55%;animation-duration:6s;animation-delay:4s;width:3px;"></div>
+  <div class="ray" style="left:65%;background:linear-gradient(180deg,rgba(168,240,255,0.12),transparent);height:65%;animation-duration:11s;animation-delay:1s;width:5px;"></div>
+  <div class="ray" style="left:82%;background:linear-gradient(180deg,rgba(91,200,234,0.16),transparent);height:58%;animation-duration:8s;animation-delay:3s;width:2px;"></div>
+
+  <!-- Bioluminescent dots -->
+  <div class="dot" style="left:15%;top:60%;width:4px;height:4px;animation-duration:3s;animation-delay:0.5s;"></div>
+  <div class="dot" style="left:35%;top:75%;width:3px;height:3px;animation-duration:4s;animation-delay:1s;"></div>
+  <div class="dot" style="left:55%;top:65%;width:5px;height:5px;animation-duration:2.5s;animation-delay:2s;"></div>
+  <div class="dot" style="left:72%;top:80%;width:3px;height:3px;animation-duration:3.5s;animation-delay:0.8s;"></div>
+  <div class="dot" style="left:88%;top:70%;width:4px;height:4px;animation-duration:4.5s;animation-delay:1.5s;"></div>
+  <div class="dot" style="left:22%;top:85%;width:3px;height:3px;animation-duration:3s;animation-delay:2.5s;"></div>
+
+  <!-- Bubbles -->
+  <div class="bbl" style="left:20%;bottom:-20px;width:8px;height:8px;animation-duration:8s;animation-delay:0s;"></div>
+  <div class="bbl" style="left:40%;bottom:-20px;width:5px;height:5px;animation-duration:12s;animation-delay:3s;"></div>
+  <div class="bbl" style="left:60%;bottom:-20px;width:10px;height:10px;animation-duration:10s;animation-delay:6s;"></div>
+  <div class="bbl" style="left:75%;bottom:-20px;width:6px;height:6px;animation-duration:9s;animation-delay:1s;"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">SOMEK · Proiect eTwinning</div>
+    <h1>Oceanul<br><em>Viu</em></h1>
+    <div class="hero-tagline">Lumea submarină în splendoarea sa</div>
+    <p class="hero-p">Un ocean sănătos reglează climatul, produce jumătate din oxigenul pe care îl respirăm și hrănește miliarde de oameni. Descoperă bogăția extraordinară a vieții marine.</p>
+    <div class="scroll-hint">&#x2193; &nbsp; explorează adâncurile</div>
+  </div>
+</div>
+
+<!-- ZONES -->
+<div class="zones">
+  <div class="zones-title">Straturile Vieții</div>
+  <div class="zones-sub">Fiecare zonă a oceanului ascunde un ecosistem unic</div>
+
+  <div class="zone-row">
+    <div class="zone-card">
+      <div class="zone-bg" style="background:linear-gradient(135deg,#0a5f9a,#0a3a6a);"></div>
+      <div class="zone-card-content">
+        <div class="zone-depth">0 – 200m</div>
+        <h3>Zona Epipelagică</h3>
+        <p>Pătruns de lumina solară, acest strat găzduiește cea mai mare diversitate. Fitoplanctonul produce 50% din oxigenul Pământului.</p>
+        <div class="zone-creatures">
+          <span class="creature-pill">🐋 Balene</span>
+          <span class="creature-pill">🦈 Rechini</span>
+          <span class="creature-pill">🐬 Delfini</span>
+          <span class="creature-pill">🐢 Țestoase</span>
+        </div>
+      </div>
+    </div>
+    <div class="zone-card">
+      <div class="zone-bg" style="background:linear-gradient(135deg,#063058,#04203a);"></div>
+      <div class="zone-card-content">
+        <div class="zone-depth">200 – 1000m</div>
+        <h3>Zona Mesopelagică</h3>
+        <p>Zona crepusculară, tărâmul migrațiilor verticale zilnice. 90% din peștii din lume trăiesc în această zonă de umbră luminoasă.</p>
+        <div class="zone-creatures">
+          <span class="creature-pill">🦑 Calmari</span>
+          <span class="creature-pill">🪼 Meduze</span>
+          <span class="creature-pill">🐙 Caracatițe</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="zone-row">
+    <div class="zone-card">
+      <div class="zone-bg" style="background:linear-gradient(135deg,#03152a,#020c1a);"></div>
+      <div class="zone-card-content">
+        <div class="zone-depth">1000 – 4000m</div>
+        <h3>Zona Batipelagică</h3>
+        <p>Întuneric total, presiune extremă. Creaturile bioluminescente creează propriile lumini în beznă — un spectacol invizibil ochiului uman.</p>
+        <div class="zone-creatures">
+          <span class="creature-pill">🎣 Peștele pescar</span>
+          <span class="creature-pill">✨ Bioluminescență</span>
+        </div>
+      </div>
+    </div>
+    <div class="zone-card">
+      <div class="zone-bg" style="background:linear-gradient(135deg,#1a4a2a,#0d2a18);"></div>
+      <div class="zone-card-content">
+        <div class="zone-depth">0 – 40m · tropical</div>
+        <h3>Recifele de Coral</h3>
+        <p>Deși acoperă sub 1% din fundul oceanului, recifele găzduiesc 25% din toate speciile marine. Cele mai diverse ecosisteme acvatice.</p>
+        <div class="zone-creatures">
+          <span class="creature-pill">🐠 Pești colorați</span>
+          <span class="creature-pill">⭐ Stele de mare</span>
+          <span class="creature-pill">🦀 Crabi</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FACTS -->
+<div class="facts-strip">
+  <div class="facts-strip-title">De ce contează oceanul?</div>
+  <div class="facts-grid">
+    <div class="fact-card">
+      <span class="fact-icon">🌬️</span>
+      <h4>Plămânul Planetei</h4>
+      <p>Fitoplanctonul marin produce între 50 și 80% din oxigenul atmosferei Pământului prin fotosinteză — mai mult decât toate pădurile la un loc.</p>
+      <span class="fact-highlight">50–80%</span>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">🌡️</span>
+      <h4>Termostatul Climei</h4>
+      <p>Oceanele absorb 90% din căldura excedentară și 30% din CO₂ produs de activitățile umane, atenuând radical efectele schimbărilor climatice.</p>
+      <span class="fact-highlight">90% căldură</span>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">🐟</span>
+      <h4>Sursa de Hrană</h4>
+      <p>Peste 3 miliarde de oameni depind de ocean ca principală sursă de proteine. Pescuitul și acvacultura susțin 600 de milioane de locuri de muncă.</p>
+      <span class="fact-highlight">3 miliarde</span>
+    </div>
+    <div class="fact-card">
+      <span class="fact-icon">🧬</span>
+      <h4>Biodiversitate Unică</h4>
+      <p>Oceanele conțin 230.000+ specii cunoscute și posibil peste 2 milioane nedescoperite. Vița-de-mare, rechinii și meduzele există de sute de milioane de ani.</p>
+      <span class="fact-highlight">230.000+ specii</span>
+    </div>
+  </div>
+</div>
+
+<!-- SPECIES -->
+<div class="species-showcase">
+  <h2>Specii remarcabile ale oceanului</h2>
+  <div class="species-list">
+    <div class="species-row">
+      <div class="species-emoji">🐋</div>
+      <div class="species-info">
+        <h4>Balena albastră</h4>
+        <p>Cel mai mare animal care a trăit vreodată pe Pământ — până la 30 de tone, 33 de metri. Sunete audibile la mii de km distanță.</p>
+      </div>
+      <div class="species-depth">0–500m</div>
+    </div>
+    <div class="species-row">
+      <div class="species-emoji">🦈</div>
+      <div class="species-info">
+        <h4>Rechinul balenă</h4>
+        <p>Cel mai mare pește din ocean — 12 metri, total inofensiv pentru oameni. Se hrănește exclusiv cu plancton și pești mici.</p>
+      </div>
+      <div class="species-depth">0–700m</div>
+    </div>
+    <div class="species-row">
+      <div class="species-emoji">🪼</div>
+      <div class="species-info">
+        <h4>Meduza nemuritoare</h4>
+        <p>Turritopsis dohrnii — singura creatură biologică „nemuritoare". Se poate regenera complet revenind la stadiul larvar.</p>
+      </div>
+      <div class="species-depth">0–300m</div>
+    </div>
+    <div class="species-row">
+      <div class="species-emoji">🐙</div>
+      <div class="species-info">
+        <h4>Caracatița cu inele albastre</h4>
+        <p>Mică cât o mână, veninul ei este de 10.000 de ori mai puternic decât cianura. Își schimbă culoarea și textura pielii în milisecunde.</p>
+      </div>
+      <div class="species-depth">0–50m</div>
+    </div>
+    <div class="species-row">
+      <div class="species-emoji">🐬</div>
+      <div class="species-info">
+        <h4>Delfinul cu bot de sticlă</h4>
+        <p>IQ comparabil cu al primatelor. Folosesc unelte, se recunosc în oglindă și au limbaje regionale distincte de comunicare.</p>
+      </div>
+      <div class="species-depth">0–200m</div>
+    </div>
+    <div class="species-row">
+      <div class="species-emoji">🌊</div>
+      <div class="species-info">
+        <h4>Corali — constructorii urbani ai mării</h4>
+        <p>Nu plante, ci animale mici (polipi) care construiesc structuri vizibile din spațiu. Reciful Barieră din Australia este vizibil de pe orbită.</p>
+      </div>
+      <div class="species-depth">0–40m</div>
+    </div>
+  </div>
+</div>
+
+<!-- HEALTH BANNER -->
+<div class="health-banner">
+  <h2>Un ocean sănătos,<br>o planetă sănătoasă</h2>
+  <p>Protejarea biodiversității marine nu este opțională — este esențială pentru supraviețuirea noastră. Fiecare act de conservare contează.</p>
+  <div class="health-stats">
+    <div class="hs-item">
+      <span class="hs-num">71%</span>
+      <div class="hs-label">din suprafața Pământului</div>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">97%</span>
+      <div class="hs-label">din apa Pământului</div>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">3B</span>
+      <div class="hs-label">oameni hrăniți de ocean</div>
+    </div>
+    <div class="hs-item">
+      <span class="hs-num">∞</span>
+      <div class="hs-label">specii nedescoperite</div>
+    </div>
+  </div>
+</div>
+
+<div class="footer">SOMEK · Student-led Oceanic Movement for Eco-friendly Knowledge · eTwinning 2025</div>
+
+</body>
+</html>
